@@ -1,7 +1,8 @@
 body {
-  background: #2b3137;
+  background: #000;
   min-height: 100vh;
   position: relative;
+  margin: 0;
 }
 
 .button {
@@ -15,35 +16,37 @@ body {
   flex-direction: column;
   font-size: 24px;
   font-weight: 700;
-  gap: 10px;
+  gap: 15px;
   height: 52px;
   justify-content: center;
   line-height: normal;
   padding: 16px 24px;
-  text-align: center;
   width: 208px;
 }
 
+.button:hover {
+  background-color: #000000b2;
+  transition: 0.50s all ease;
+}
+
 .content {
-  background-color: #24292e;
+  position: relative;
+  background-color: #000000b2;
   border: 5px solid #00CC6A;
   filter: drop-shadow(0px 0px 30px #10893E);
-  height: 871px;
-  left: 50%;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 75%;
-  z-index: 1;
+  max-width: 1200px;
+  width: 90%;
+  margin: clamp(20px, 5vh, 60px) auto;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
 .content__main {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 40px;
   justify-content: start;
-  padding: 100px;
+  word-break: break-all;
 }
 
 .friends__container {
@@ -78,7 +81,7 @@ body {
 .form {
   display: flex;
   flex-direction: column;
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-style: normal;
 }
 
@@ -118,13 +121,34 @@ body {
 }
 
 .form__link {
+  position: relative;
   color: #f5032b;
   cursor: pointer;
   font-size: 24px;
   font-weight: 700;
   line-height: 110%;
   text-align: center;
-  text-decoration-line: underline;
+  text-decoration: none;
+}
+
+.form__link::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-radius: 4px;
+  background-color: #f5032b;
+  bottom: 0;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform .3s ease-in-out;
+}
+
+.form__link:hover::before {
+  transform-origin: left;
+  transform: scaleX(1);
+  color: white;
 }
 
 .prizeDraw__container {
@@ -135,6 +159,7 @@ body {
   height: 199px;
   line-height: 160%;
   margin-top: 1rem;
+  font-family: 'Montserrat';
 }
 
 .prizeDraw__title {
@@ -142,7 +167,7 @@ body {
   font-size: 24px;
   font-weight: 700;
   line-height: 110%;
-  justify-content: flex-end;
+  font-family: 'Montserrat';
 }
 
 .primary {
@@ -153,20 +178,19 @@ body {
 .section--results {
   align-items: start;
   display: flex;
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-style: normal;
-  gap: 10em;
+  gap: 8em;
 }
 
 .section__title {
   color: #fff;
-  font-family: Bebas Neue;
-  font-size: 88px;
-  font-style: normal;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 8rem);
+  /* Pra se adaptar ao tamanho da tela */
   font-weight: 700;
-  line-height: 80%;
-  margin: 0 0 80px 0;
-  margin-top: 1em;
+  line-height: 1;
+  margin: 0 0 40px 0;
 }
 
 .section__title>span {
@@ -176,4 +200,38 @@ body {
 .secondary {
   background-color: #fff;
   color: #00CC6A;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .section--results {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 400px) {
+  .content {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  input[type="text"] {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    /* em telas bem pequenas, empilha */
+  }
+
+  .buttons button {
+    width: 100%;
+  }
 }
